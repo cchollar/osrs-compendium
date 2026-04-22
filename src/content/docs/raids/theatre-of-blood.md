@@ -1,3 +1,0 @@
----
-title: Theatre of Blood
----

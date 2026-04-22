@@ -1,3 +1,0 @@
----
-title: Chambers of Xeric
----

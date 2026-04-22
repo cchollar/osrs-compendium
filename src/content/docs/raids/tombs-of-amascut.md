@@ -1,3 +1,0 @@
----
-title: Tombs of Amascut
----
