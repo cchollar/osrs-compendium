@@ -1,0 +1,41 @@
+---
+interface Props {
+  src: string;
+  alt: string;
+  href?: string;
+}
+
+const { src, alt, href } = Astro.props;
+---
+
+{href ? (
+  <a href={href} class="inline-icon-link" target="_blank" rel="noopener noreferrer">
+    <img src={src} alt={alt} class="inline-icon" />
+  </a>
+) : (
+  <img src={src} alt={alt} class="inline-icon" />
+)}
+
+<style>
+  .inline-icon {
+    display: inline-block;
+    vertical-align: text-bottom;
+    height: 20px;
+    width: auto;
+    margin: 0 0.15em;
+    image-rendering: pixelated;
+  }
+
+  .inline-icon-link {
+    /* Strip default link styling so the icon doesn't get underlined/colored */
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .inline-icon-link:hover .inline-icon {
+    /* Subtle hover feedback so users know it's clickable */
+    filter: brightness(1.15);
+    transform: scale(1.1);
+    transition: filter 0.15s, transform 0.15s;
+  }
+</style>
