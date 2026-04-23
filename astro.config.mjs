@@ -11,6 +11,9 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 export default defineConfig({
     integrations: [starlight({
         title: 'An OSRS Compendium',
+		logo: {
+			src: './src/assets/arcane_grimoire_echo_detail.png',
+		},
         social: [{ icon: 'github', label: 'GitHub', href: 'https://github.com/withastro/starlight' }],
         sidebar: [
             {
