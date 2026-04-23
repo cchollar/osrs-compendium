@@ -1,0 +1,66 @@
+---
+interface Props {
+  text: string;
+  label?: string;
+}
+
+const { text, label = 'Copy' } = Astro.props;
+---
+
+<button class="copy-button" data-copy-text={text}>
+  <span class="copy-label">{label}</span>
+  <span class="copy-feedback">Copied!</span>
+</button>
+
+<style>
+  .copy-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    background: var(--sl-color-accent);
+    color: var(--sl-color-white);
+    border: none;
+    border-radius: 0.25rem;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 0.875rem;
+    font-weight: 600;
+    transition: background 0.15s;
+  }
+
+  .copy-button:hover {
+    background: var(--sl-color-accent-high);
+  }
+
+  .copy-feedback {
+    display: none;
+  }
+
+  .copy-button.copied .copy-label {
+    display: none;
+  }
+
+  .copy-button.copied .copy-feedback {
+    display: inline;
+  }
+</style>
+
+<script>
+  // Use event delegation on document so we only attach one listener total
+  document.addEventListener('click', async (event) => {
+    const button = (event.target as HTMLElement)?.closest('.copy-button');
+    if (!button) return;
+
+    const text = button.getAttribute('data-copy-text');
+    if (!text) return;
+
+    try {
+      await navigator.clipboard.writeText(text);
+      button.classList.add('copied');
+      setTimeout(() => button.classList.remove('copied'), 2000);
+    } catch (err) {
+      console.error('Failed to copy:', err);
+    }
+  });
+</script>
